@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 - 2022 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2025 Harrison Kungu  (harrisonkungu96@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tananaev.passportreader
+package com.tananaev.maishacardscan
 
 import androidx.multidex.MultiDexApplication
 import org.spongycastle.jce.provider.BouncyCastleProvider

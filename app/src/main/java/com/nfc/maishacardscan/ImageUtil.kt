@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 - 2022 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2025 Harrison Kungu  (harrisonkungu96@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tananaev.passportreader
+package com.tananaev.maishacardscan
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.gemalto.jp2.JP2Decoder
@@ -24,7 +23,7 @@ import java.io.InputStream
 
 object ImageUtil {
 
-    fun decodeImage(context: Context?, mimeType: String, inputStream: InputStream?): Bitmap {
+    fun decodeImage(mimeType: String, inputStream: InputStream?): Bitmap {
         return if (mimeType.equals("image/jp2", ignoreCase = true) || mimeType.equals(
                 "image/jpeg2000",
                 ignoreCase = true

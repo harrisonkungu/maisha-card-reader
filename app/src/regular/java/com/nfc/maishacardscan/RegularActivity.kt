@@ -1,3 +1,3 @@
-package com.tananaev.passportreader
+package com.tananaev.maishacardscan
 
 class RegularActivity : MainActivity()

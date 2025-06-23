@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 - 2022 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2025 Harrison Kungu  (harrisonkungu96@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,12 @@
  */
 @file:Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 
-package com.tananaev.passportreader
+package com.tananaev.maishacardscan
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.IsoDep
@@ -37,7 +36,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import com.tananaev.passportreader.ImageUtil.decodeImage
+import com.tananaev.maishacardscan.ImageUtil.decodeImage
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import net.sf.scuba.smartcards.CardService
 import net.sf.scuba.smartcards.CardServiceException
@@ -434,7 +433,7 @@ abstract class MainActivity : AppCompatActivity() {
                             val buffer = ByteArray(imageLength)
                             dataInputStream.readFully(buffer, 0, imageLength)
                             val inputStream: InputStream = ByteArrayInputStream(buffer, 0, imageLength)
-                            bitmap = decodeImage(this@MainActivity, faceImageInfo.mimeType, inputStream)
+                            bitmap = decodeImage(faceImageInfo.mimeType, inputStream)
                             imageBase64 = Base64.encodeToString(buffer, Base64.DEFAULT)
                         }
                     } catch (e: Exception) {
@@ -501,90 +500,6 @@ abstract class MainActivity : AppCompatActivity() {
         }
 
 
-//        override fun doInBackground(vararg params: Void?): Exception? {
-//            try {
-//                isoDep.timeout = 10000
-//                val cardService = CardService.getInstance(isoDep)
-//                cardService.open()
-//                val service = PassportService(
-//                    cardService,
-//                    PassportService.NORMAL_MAX_TRANCEIVE_LENGTH,
-//                    PassportService.DEFAULT_MAX_BLOCKSIZE,
-//                    false,
-//                    false,
-//                )
-//                service.open()
-//                var paceSucceeded = false
-//                try {
-//                    val cardAccessFile = CardAccessFile(service.getInputStream(PassportService.EF_CARD_ACCESS))
-//                    val securityInfoCollection = cardAccessFile.securityInfos
-//                    for (securityInfo: SecurityInfo in securityInfoCollection) {
-//                        if (securityInfo is PACEInfo) {
-//                            service.doPACE(
-//                                bacKey,
-//                                securityInfo.objectIdentifier,
-//                                PACEInfo.toParameterSpec(securityInfo.parameterId),
-//                                null,
-//                            )
-//                            paceSucceeded = true
-//                        }
-//                    }
-//                } catch (e: Exception) {
-//                    Log.w(TAG, e)
-//                }
-//                service.sendSelectApplet(paceSucceeded)
-//                if (!paceSucceeded) {
-//                    try {
-//                        service.getInputStream(PassportService.EF_COM).read()
-//                    } catch (e: Exception) {
-//                        service.doBAC(bacKey)
-//                    }
-//                }
-//                val dg1In = service.getInputStream(PassportService.EF_DG1)
-//                dg1File = DG1File(dg1In)
-//                val dg2In = service.getInputStream(PassportService.EF_DG2)
-//                dg2File = DG2File(dg2In)
-//                val sodIn = service.getInputStream(PassportService.EF_SOD)
-//                sodFile = SODFile(sodIn)
-//
-//
-//                val dg7In = service.getInputStream(PassportService.EF_DG7)
-//                val dg7File = DG7File(dg7In)
-//                val signatureImage = extractSignatureFromDG7(dg7File)
-//                if (signatureImage != null) {
-//                    signatureBase64 = Base64.encodeToString(signatureImage, Base64.DEFAULT)
-//                }
-//
-//
-//                doChipAuth(service)
-//                doPassiveAuth()
-//
-//                val allFaceImageInfo: MutableList<FaceImageInfo> = ArrayList()
-//                dg2File.faceInfos.forEach {
-//                    allFaceImageInfo.addAll(it.faceImageInfos)
-//                }
-//
-//                if (allFaceImageInfo.isNotEmpty()) {
-//                    val faceImageInfo = allFaceImageInfo.first()
-//
-//                    Log.d(TAG, "Face Image MimeType: ${faceImageInfo.mimeType}")
-//
-//                    val imageLength = faceImageInfo.imageLength
-//                    val dataInputStream = DataInputStream(faceImageInfo.imageInputStream)
-//                    val buffer = ByteArray(imageLength)
-//                    dataInputStream.readFully(buffer, 0, imageLength)
-//                    val inputStream: InputStream = ByteArrayInputStream(buffer, 0, imageLength)
-//                    bitmap = decodeImage(this@MainActivity, faceImageInfo.mimeType, inputStream)
-//                    imageBase64 = Base64.encodeToString(buffer, Base64.DEFAULT)
-//                }
-//
-//
-//            } catch (e: Exception) {
-//                return e
-//            }
-//            return null
-//        }
-
         private fun doChipAuth(service: PassportService) {
             try {
                 val dg14In = service.getInputStream(PassportService.EF_DG14)
@@ -615,14 +530,8 @@ abstract class MainActivity : AppCompatActivity() {
                 val dataHashes = sodFile.dataGroupHashes
                 val dg14Hash = if (chipAuthSucceeded) digest.digest(dg14Encoded) else ByteArray(0)
 
-
-
-
                 val dg1Hash = digest.digest(dg1File.encoded)
                 val dg2Hash = digest.digest(dg2File.encoded)
-
-
-
 
                 Log.d(TAG, "Computed DG1 Hash: ${dg1Hash.toHexString()}")
                 Log.d(TAG, "Stored DG1 Hash: ${dataHashes[1]?.toHexString()}")
