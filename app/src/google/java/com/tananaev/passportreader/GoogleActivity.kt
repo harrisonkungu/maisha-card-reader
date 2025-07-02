@@ -1,4 +1,4 @@
-package com.tananaev.passportreader
+package com.nfc.maishacardscan
 
 import android.os.Bundle
 import android.preference.PreferenceManager
