@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tananaev.maishacardscan
+package com.nfc.maishacardscan
 
 import android.graphics.BitmapFactory
 import android.os.Bundle

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tananaev.maishacardscan
+package com.nfc.maishacardscan
 
 import androidx.multidex.MultiDexApplication
 import org.spongycastle.jce.provider.BouncyCastleProvider

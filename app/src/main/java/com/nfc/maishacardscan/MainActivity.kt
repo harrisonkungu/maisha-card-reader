@@ -15,7 +15,7 @@
  */
 @file:Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 
-package com.tananaev.maishacardscan
+package com.nfc.maishacardscan
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
@@ -36,7 +36,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import com.tananaev.maishacardscan.ImageUtil.decodeImage
+import com.nfc.maishacardscan.ImageUtil.decodeImage
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import net.sf.scuba.smartcards.CardService
 import net.sf.scuba.smartcards.CardServiceException
